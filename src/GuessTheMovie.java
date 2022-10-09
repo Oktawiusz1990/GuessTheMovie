@@ -7,75 +7,34 @@ public class GuessTheMovie {
 
         File file = new File("mov.txt");
         Scanner fileScanner = new Scanner(file);
-
-        int linesCounter = 0;
-
-        while (fileScanner.hasNextLine()) {
-            String line = fileScanner.nextLine();
-            linesCounter += 1;
-        }
-        System.out.println("------Guess the title of the movie------");
-        System.out.println("Number of movies: " + linesCounter);
-        System.out.println("Remember, space bar (whitespace) is also sign :) ");
-
-        String[] moviesTab = new String[linesCounter];
-        Scanner fileScanner1 = new Scanner(file);
-
-            while (fileScanner1.hasNextLine()) {
-                for (int i = 0; i < moviesTab.length; i++) {
-                    String line1 = fileScanner1.nextLine();
-                    moviesTab[i] = line1;
-                }
-            }
-
-        String titleToGuess = moviesTab[(int) (Math.random() * linesCounter) + 1];
-        System.out.println("Tittle to guess:");
-//        System.out.println(titleToGuess);
-
-        String tittleHidden = titleToGuess.replaceAll(".", "_");
-        System.out.println(tittleHidden);
-        char[] tittleHiddenArrays = tittleHidden.toCharArray();
-        int chance = 20;
         Scanner scanner = new Scanner(System.in);
-        String guessedTittle = tittleHidden;
 
-        while(chance > 0) {
+        int linesCounter = Game.getLinesCounter(fileScanner);
+        String[] moviesTab = new String[linesCounter];
 
-            System.out.println("\nWrite Your letter:");
+        Scanner fileScanner1 = new Scanner(file);
+        Game.getMoviesTittleTable(moviesTab, fileScanner1);
 
-            String letter = scanner.nextLine();
-            letter = letter.toLowerCase();
-            char letterChar = letter.charAt(0);
+        String titleToGuess = Game.getTitleToGuess(linesCounter, moviesTab);
+        String tittleHidden = Game.getTittleHidden(titleToGuess);
+        char[] tittleHiddenArrays = tittleHidden.toCharArray();
 
-            char[] tittle = new char[titleToGuess.length()];
+        int chance = 20;
 
-            for (int k = 0; k < tittle.length; k++) {
-                tittle[k] = titleToGuess.charAt(k);
+        String writtenLetters = "";
 
-                if (guessedTittle.contains(letter)) {
-                    System.out.println("You have already this letter");
-                    chance++;
-                    break;
-                }
+        System.out.println("------Guess the title of the movie------\n");
+        System.out.println("Number of movies: " + linesCounter);
+        System.out.println("Remember - space bar (whitespace) is also sign :) ");
+        System.out.println("\nTittle to guess\n" + tittleHidden);
 
-                else if (tittle[k] == letterChar && tittle[k] != '_') {
-                    tittleHiddenArrays[k] = letterChar;
-                }
-            }
-
-            System.out.println();
-            guessedTittle = String.valueOf(tittleHiddenArrays);
-            System.out.println(guessedTittle);
-
-            chance--;
-
-            if (guessedTittle.equals(titleToGuess)) {
-                System.out.println("CONGRATULATION! YOU WINN!\nChance left: " + chance);
-                return;
-            }
-
-            System.out.println("Chance left: " + chance);
-        }
-        System.out.println("GAME OVER");
+        if (Logic.startGame(titleToGuess, tittleHiddenArrays, chance, scanner, tittleHidden, writtenLetters))
+            return;
+        else
+            System.out.println("GAME OVER");
     }
+
+
+
+
 }
