@@ -11,7 +11,7 @@ public class Movies {
         int linesCounter = 0;
 
         while (fileScanner.hasNextLine()) {
-            String line = fileScanner.nextLine();
+            fileScanner.nextLine();
             linesCounter += 1;
         }
         return linesCounter;

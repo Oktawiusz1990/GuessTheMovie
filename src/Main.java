@@ -28,9 +28,11 @@ public class Main {
         System.out.println("Remember - space bar (whitespace) is also sign :) ");
         System.out.println("\nTittle to guess\n" + tittleHidden);
 
-        if (GameLogic.startGame(titleToGuess, tittleHiddenArrays, chance, scanner, tittleHidden, writtenLetters));
+        if (GameLogic.startGame(titleToGuess, tittleHiddenArrays, chance, scanner, tittleHidden, writtenLetters))
+            return;
         else
             System.out.println("GAME OVER");
+            System.out.println("The answer: " + titleToGuess);
     }
 
 
