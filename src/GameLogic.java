@@ -1,8 +1,11 @@
 import java.util.Scanner;
 
-public class Logic {
+public class GameLogic {
 
-    public static boolean startGame(String titleToGuess, char[] tittleHiddenArrays, int chance, Scanner scanner, String guessedTittle, String writtenLetters) {
+    public static boolean startGame(String titleToGuess, char[] tittleHiddenArrays,
+                                    int chance, Scanner scanner,
+                                    String guessedTittle, String writtenLetters) {
+
         while(chance > 0) {
             System.out.println("\nWrite Your letter:");
 

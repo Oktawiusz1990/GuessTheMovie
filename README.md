@@ -1,5 +1,5 @@
-# GuessTheMovie
-Game: Guess The Movie. 
+# Main
+Movies: Guess The Movie. 
 
 Project for Udacity OOP cours.
 

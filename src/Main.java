@@ -2,21 +2,21 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class GuessTheMovie {
+public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
         File file = new File("mov.txt");
         Scanner fileScanner = new Scanner(file);
         Scanner scanner = new Scanner(System.in);
 
-        int linesCounter = Game.getLinesCounter(fileScanner);
+        int linesCounter = Movies.getLinesCounter(fileScanner);
         String[] moviesTab = new String[linesCounter];
 
         Scanner fileScanner1 = new Scanner(file);
-        Game.getMoviesTittleTable(moviesTab, fileScanner1);
+        Movies.getMoviesTittleTable(moviesTab, fileScanner1);
 
-        String titleToGuess = Game.getTitleToGuess(linesCounter, moviesTab);
-        String tittleHidden = Game.getTittleHidden(titleToGuess);
+        String titleToGuess = Movies.getTitleToGuess(linesCounter, moviesTab);
+        String tittleHidden = Movies.getTittleHidden(titleToGuess);
         char[] tittleHiddenArrays = tittleHidden.toCharArray();
 
         int chance = 20;
@@ -28,8 +28,7 @@ public class GuessTheMovie {
         System.out.println("Remember - space bar (whitespace) is also sign :) ");
         System.out.println("\nTittle to guess\n" + tittleHidden);
 
-        if (Logic.startGame(titleToGuess, tittleHiddenArrays, chance, scanner, tittleHidden, writtenLetters))
-            return;
+        if (GameLogic.startGame(titleToGuess, tittleHiddenArrays, chance, scanner, tittleHidden, writtenLetters));
         else
             System.out.println("GAME OVER");
     }

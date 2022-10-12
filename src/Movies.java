@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Game {
+public class Movies {
     public static String getTittleHidden(String titleToGuess) {
         String tittleHidden = titleToGuess.replaceAll(".", "_");
         System.out.println(tittleHidden);
